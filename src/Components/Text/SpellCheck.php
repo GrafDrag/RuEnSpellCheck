@@ -2836,9 +2836,9 @@ class SpellCheck
 	 * @param   int           $mode    		Константы self::SIMILAR_CHARS и/или self::KEYBOARD_LAYOUT,
 	 *                                 		(их можно комбинировать). Описание констант см. выше.
 	 *                                 		При использовании self::KEYBOARD_LAYOUT время работы увеличивается примерно в 10 раз.
+	 * @param	int			  $min_length	Минимальная длина строки для парсинга
 	 * @param   array         &$words  		Ассоц. массив со словами, которые были исправлены:
 	 *                                 		в ключах оригиналы, в значениях исправленные слова.
-	 * @param	int			  $min_length	Минимальная длина строки для парсинга
 	 * @return  string|bool            		Returns FALSE if error occured
 	 */
 	public function parse($s, $mode = self::SIMILAR_CHARS, $min_length = 4, array &$words = null)

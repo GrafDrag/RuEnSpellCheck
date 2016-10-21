@@ -2848,6 +2848,7 @@ class SpellCheck
 		if (! ReflectionTypeHint::isValid()) return false;
 		if (! is_string($s)) return $s;
 
+		echo "<pre>"; print_r($s); echo "</pre>";
 		if ($mode < self::SIMILAR_CHARS || $mode > (self::SIMILAR_CHARS | self::KEYBOARD_LAYOUT | self::ADD_FIX))
 		{
 			trigger_error('Unknown mode', E_USER_WARNING);
@@ -2860,6 +2861,7 @@ class SpellCheck
 		$additional_chars = array(
 			"\xc2\xad",  #"мягкие" переносы строк (&shy;)
 		);
+		echo "<pre>"; print_r($s); echo "</pre>";
 		#http://ru.wikipedia.org/wiki/Диакритические_знаки
 		$s = UTF8::diactrical_remove($s, $additional_chars, $is_can_restored = true, $restore_table);
 

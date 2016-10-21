@@ -2876,7 +2876,7 @@ class SpellCheck
 		return preg_replace_callback('/(?> (' . $this->en . ')  #1 латинские буквы
                                          | (' . $this->tt . ')  #2 русские буквы
                                          | (' . $this->sc . ')  #3 символы, которые м.б. набраны по ошибке в английской раскладке клавиатуры вместо русских букв
-                                       ){3,}+
+                                       ){'.$this->min_world_length.',}+
                                       /sxSX', array($this, '_word'), $s);
 	}
 

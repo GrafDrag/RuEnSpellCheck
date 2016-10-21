@@ -3107,8 +3107,8 @@ class UTF8
 		if (! is_string($s)) return $s;
 
 		#speed improve
-		if (strlen($s) < 4  #по минимальной длине сущности - 4 байта: &#d; &xx;
-			|| ($pos = strpos($s, '&') === false) || strpos($s, ';', $pos) === false) return $s;
+		if (/*strlen($s) < 4  #по минимальной длине сущности - 4 байта: &#d; &xx;
+			||*/ ($pos = strpos($s, '&') === false) || strpos($s, ';', $pos) === false) return $s;
 
 		$table = self::$html_entity_table;
 		if ($is_special_chars) $table += self::$html_special_chars_table;

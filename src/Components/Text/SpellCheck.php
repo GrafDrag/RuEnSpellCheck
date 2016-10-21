@@ -2844,6 +2844,7 @@ class SpellCheck
 	public function parse($s, $mode = self::SIMILAR_CHARS, $min_length = 4, array &$words = null)
 	{
 		if($min_length != $this->min_world_length) $this->min_world_length = $min_length;
+		echo "<pre>"; print_r($this->min_world_length); echo "</pre>";
 		if (! ReflectionTypeHint::isValid()) return false;
 		if (! is_string($s)) return $s;
 
@@ -2864,8 +2865,11 @@ class SpellCheck
 
 		$this->words = array();
 		$s = $this->_parse1($s);
+		echo "<pre>"; print_r($s); echo "</pre>";
 		$s = $this->_parse2($s);
+		echo "<pre>"; print_r($s); echo "</pre>";
 		$s = UTF8::diactrical_restore($s, $restore_table);
+		echo "<pre>"; print_r($s); echo "</pre>";
 		$words = $this->words;
 		return $s;
 	}

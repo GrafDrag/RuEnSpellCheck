@@ -2865,6 +2865,7 @@ class SpellCheck
 		#http://ru.wikipedia.org/wiki/Диакритические_знаки
 		$s = UTF8::diactrical_remove($s, $additional_chars, $is_can_restored = true, $restore_table);
 
+		echo "<pre>"; print_r($s); echo "</pre>";
 		$this->words = array();
 		$s = $this->_parse1($s);
 		echo "<pre>"; print_r($s); echo "</pre>";

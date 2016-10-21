@@ -3020,7 +3020,7 @@ class SpellCheck
 
 		$c = count($suggestions);
 		if ($c === 0) $s = $word;
-		else $s = $this->_detect($word, $suggestions, ! empty($a[3]));
+		else $s = $this->_detect($word, $suggestions, ! empty($a[$this->min_world_length]));
 		if ($s !== $word)
 		{
 			$this->words[$word] = $s;

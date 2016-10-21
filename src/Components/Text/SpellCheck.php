@@ -74,6 +74,8 @@ class SpellCheck
 	 */
 	const ADD_FIX = 4;
 
+	private $min_world_length = 4;
+
 	#английский (all)
 	private $en = '[a-zA-Z]';
 	
@@ -2830,16 +2832,18 @@ class SpellCheck
 	/**
 	 * Исправляет клавиатурные опечатки в тексте.
 	 * 
-	 * @param   scalar|null   $s       Текст в кодировке UTF-8.
-	 * @param   int           $mode    Константы self::SIMILAR_CHARS и/или self::KEYBOARD_LAYOUT,
-	 *                                 (их можно комбинировать). Описание констант см. выше.
-	 *                                 При использовании self::KEYBOARD_LAYOUT время работы увеличивается примерно в 10 раз.
-	 * @param   array         &$words  Ассоц. массив со словами, которые были исправлены:
-	 *                                 в ключах оригиналы, в значениях исправленные слова.
-	 * @return  string|bool            Returns FALSE if error occured
+	 * @param   scalar|null   $s       		Текст в кодировке UTF-8.
+	 * @param   int           $mode    		Константы self::SIMILAR_CHARS и/или self::KEYBOARD_LAYOUT,
+	 *                                 		(их можно комбинировать). Описание констант см. выше.
+	 *                                 		При использовании self::KEYBOARD_LAYOUT время работы увеличивается примерно в 10 раз.
+	 * @param   array         &$words  		Ассоц. массив со словами, которые были исправлены:
+	 *                                 		в ключах оригиналы, в значениях исправленные слова.
+	 * @param	int			  $min_length	Минимальная длина строки для парсинга
+	 * @return  string|bool            		Returns FALSE if error occured
 	 */
-	public function parse($s, $mode = self::SIMILAR_CHARS, array &$words = null)
+	public function parse($s, $mode = self::SIMILAR_CHARS, array &$words = null, $min_length = 4)
 	{
+		if($min_length != $this->min_world_length) $this->min_world_length = $min_length;
 		if (! ReflectionTypeHint::isValid()) return false;
 		if (! is_string($s)) return $s;
 
@@ -2978,7 +2982,7 @@ class SpellCheck
 
 		}
 		#если найдено слово только из латинских букв; минимальная длина -- 4 буквы!
-		elseif (! empty($a[1]) && strlen($word) >= 4)
+		elseif (! empty($a[1]) && strlen($word) >= $this->min_world_length)
 		{
 			if (($this->mode & self::KEYBOARD_LAYOUT) === 0) return $word;
 
@@ -2990,7 +2994,7 @@ class SpellCheck
 			$suggestions['tt1'] = strtr($word, $this->table_flip[1]);
 		}
 		#если найдено слово только из русских букв; минимальная длина -- 4 буквы!
-		elseif (! empty($a[2]) && strlen($word) >= 8)
+		elseif (! empty($a[2]) && strlen($word) >= $this->min_world_length)
 		{
 			if (($this->mode & self::KEYBOARD_LAYOUT) === 0) return $word;
 

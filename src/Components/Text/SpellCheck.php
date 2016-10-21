@@ -2841,7 +2841,7 @@ class SpellCheck
 	 * @param	int			  $min_length	Минимальная длина строки для парсинга
 	 * @return  string|bool            		Returns FALSE if error occured
 	 */
-	public function parse($s, $mode = self::SIMILAR_CHARS, array &$words = null, $min_length = 4)
+	public function parse($s, $mode = self::SIMILAR_CHARS, $min_length = 4, array &$words = null)
 	{
 		if($min_length != $this->min_world_length) $this->min_world_length = $min_length;
 		if (! ReflectionTypeHint::isValid()) return false;
